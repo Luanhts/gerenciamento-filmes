@@ -1,10 +1,13 @@
 const Filme = require("../models/filmeModel")
 
-const store = (req, res) => {
-    Filme.create(req.body)
-
-    res.json();
-}
+const store = async (req, res) => {
+    try{
+        const content = await Filme.create(req.body)
+        res.status(201).json(content);
+    } catch (error) {
+        res.status(400).send(error);
+    }
+};
 
 const index = (req, res) => {
     const content = Filme.find().exec();
@@ -13,7 +16,7 @@ const index = (req, res) => {
 };
 
 const show = (req, res) => {
-    const content = Filme.findById(req.params.id).exec();
+    const content = Filme.findById(req.params.id).exec(); // toda funcao do mongoose tem que ter o exec no fim, só o create que não
     res.json(content)
 }
 

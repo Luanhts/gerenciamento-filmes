@@ -1,15 +1,14 @@
 const mongoose = require("mongoose");
 
-const db = "mongodb://localhost:27017/locadora"
-
-async function connect() {
-    await mongoose.connect(db);
+const main = async () => {
+    try{
+        await mongoose.connect(process.env.MONGODB)
+        console.log("Conectado com sucesso")
+    } catch (error) {
+        console.log(error)
+    }
 }
 
-connect()
-
-.then(() => console.log("Conectou!!!"))
-
-.catch((err) => console.log(err))
+main()
 
 module.exports = mongoose

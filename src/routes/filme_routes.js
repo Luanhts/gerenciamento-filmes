@@ -1,7 +1,10 @@
-const express = require("express");
+const Router = require('express')
+
 const filmeController = require("../controllers/filmeController");
 
-router.post('/', filmeController.create);
+const router = Router();
+
+router.post('/', filmeController.store);
 router.get('/', filmeController.index);
 router.get('/:id', filmeController.show);
 router.put('/:id', filmeController.update);
